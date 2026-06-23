@@ -33,7 +33,7 @@ A modern full-stack Student Management System built with **React.js** and **Expr
 📸 Current Progress (v0.1)
 Dashboard Preview
 
-[alt text](image.png)
+[alt text](/assets/image.png)
 
 
 Implemented Features
