@@ -29,7 +29,7 @@ body {
 }
 
 #search {
-  width: 75%;
+  width: 45%;
   padding: 12px 18px;
   border: 2px solid #ddd;
   border-radius: 8px;
@@ -39,6 +39,31 @@ body {
 }
 
 #search:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
+}
+
+#selectdept {
+  padding: 12px 40px 12px 18px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+  transition: 0.3s;
+  margin-left: 10px;
+  min-width: 150px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#selectdept:hover {
+  border-color: #999;
+}
+
+#selectdept:focus {
   border-color: #1a73e8;
   box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
 }
@@ -59,46 +84,49 @@ body {
   background: #1557b0;
 }
 
-ul {
-  list-style: none;
+#Display {
   margin-top: 20px;
+}
+
+#Display ul {
+  list-style: none;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-li {
+#Display li {
   display: flex;
   padding: 14px 20px;
   background: white;
   border-bottom: 1px solid #eee;
 }
 
-li:last-child {
+#Display li:last-child {
   border-bottom: none;
 }
 
-li p {
+#Display li p {
   flex: 1;
   text-align: center;
   font-size: 1rem;
 }
 
-#stud_head {
+#Display #stud_head {
   background: #1a73e8;
   font-weight: bold;
 }
 
-#stud_head p {
+#Display #stud_head p {
   color: white;
   font-size: 1.05rem;
 }
 
-.stud_info:nth-child(even) {
+#Display .stud_info:nth-child(even) {
   background: #f8f9fa;
 }
 
-.stud_info:hover {
+#Display .stud_info:hover {
   background: #e8f0fe;
 }
 
@@ -117,4 +145,93 @@ footer {
 
 .App {
   padding-bottom: 70px;
+}
+
+#AddStudentModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#AddStudentModal {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+#AddStudentModal h2 {
+  color: #1a73e8;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.AddStudentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.AddStudentForm label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.AddStudentForm input,
+.AddStudentForm select {
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.AddStudentForm input:focus,
+.AddStudentForm select:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.cancel-btn,
+.submit-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.cancel-btn {
+  background: #f0f2f5;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background: #e0e2e5;
+}
+
+.submit-btn {
+  background: #1a73e8;
+  color: white;
+}
+
+.submit-btn:hover {
+  background: #1557b0;
 }
