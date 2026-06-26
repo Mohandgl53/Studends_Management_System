@@ -25,7 +25,7 @@ function StudentControl({ search, setSearch, selectedDepart, setSelectedDepart, 
                 <option value="eee">EEE</option>
                 <option value="mech">MECH</option>
             </select>
-            <button id="addstud-btn" onClick={()=>setShowAddStud(true)}>Add New Student</button>
+            <button id="addstud-btn" onClick={() => setShowAddStud(true)}>Add New Student</button>
         </div>
     )
 }

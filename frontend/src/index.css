@@ -84,50 +84,62 @@ body {
   background: #1557b0;
 }
 
-#Display {
+#StudentListDisplay {
   margin-top: 20px;
 }
 
-#Display ul {
+#StudentListDisplay ul {
   list-style: none;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#Display li {
+#StudentListDisplay li {
   display: flex;
   padding: 14px 20px;
   background: white;
   border-bottom: 1px solid #eee;
 }
 
-#Display li:last-child {
+#StudentListDisplay li:last-child {
   border-bottom: none;
 }
 
-#Display li p {
+#StudentListDisplay li p {
   flex: 1;
   text-align: center;
   font-size: 1rem;
 }
 
-#Display #stud_head {
+#StudentListDisplay #stud_head {
   background: #1a73e8;
   font-weight: bold;
 }
 
-#Display #stud_head p {
+#StudentListDisplay #stud_head p {
   color: white;
   font-size: 1.05rem;
 }
 
-#Display .stud_info:nth-child(even) {
+#StudentListDisplay .stud_info:nth-child(even) {
   background: #f8f9fa;
 }
 
-#Display .stud_info:hover {
+#StudentListDisplay .stud_info:hover {
   background: #e8f0fe;
+}
+
+#StudentListDisplay .stud_info a {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+#StudentListDisplay .stud_info a p {
+  flex: 1;
+  text-align: center;
 }
 
 footer {
@@ -234,4 +246,87 @@ footer {
 
 .submit-btn:hover {
   background: #1557b0;
+}
+
+#StudentView {
+  background: white;
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+
+#StudentView h2 {
+  color: #1a73e8;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.StudentView {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.StudentView label {
+  font-weight: 600;
+  color: #333;
+}
+
+.StudentView input,
+.StudentView select {
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.StudentView input:focus,
+.StudentView select:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
+}
+
+.edit-btn,
+.delete-btn,
+.cancel-btn,
+.submit-btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background: #ff9800;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #e68900;
+}
+
+.delete-btn {
+  background: #e53935;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c62828;
+}
+
+#StudentView .modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#StudentView .modal-actions button {
+  flex: 1;
+  min-width: 110px;
 }

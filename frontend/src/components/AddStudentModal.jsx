@@ -1,14 +1,6 @@
-import { useState } from "react";
 
-const AddStudentModal = ({ showAddStud, setShowAddStud, handleAddStudent }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    rollno: "",
-    department: "",
-    year: "",
-    email: "",
-    contact: "",
-  });
+
+const AddStudentModal = ({ showAddStud, setShowAddStud, handleAddStudent, formData, setFormData }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,12 +9,12 @@ const AddStudentModal = ({ showAddStud, setShowAddStud, handleAddStudent }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAddStudent(formData);
-    setFormData({ name: "", rollno: "", department: "", year: "", email: "", contact: "" });
+    setFormData({ name: "", rollno: "", dept: "", year: "", email: "", contact: "" });
     setShowAddStud(false);
   };
 
   const handleCancel = () => {
-    setFormData({ name: "", rollno: "", department: "", year: "", email: "", contact: "" });
+    setFormData({ name: "", rollno: "", dept: "", year: "", email: "", contact: "" });
     setShowAddStud(false);
   };
 
@@ -39,7 +31,7 @@ const AddStudentModal = ({ showAddStud, setShowAddStud, handleAddStudent }) => {
             <input type="text" id="rollno" name="rollno" value={formData.rollno} onChange={handleChange} required />
 
             <label htmlFor="department">Department</label>
-            <select id="department" name="department" value={formData.department} onChange={handleChange} required>
+            <select id="department" name="dept" value={formData.dept} onChange={handleChange} required>
               <option value="">Select Department</option>
               <option value="AI&DS">AI&DS</option>
               <option value="CSE">CSE</option>
