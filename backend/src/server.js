@@ -2,18 +2,19 @@ import express from "express";
 import "dotenv/config";
 import { students } from "./constant.js";
 import cors from "cors";
+import Student from "./models/Student.js";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/api/data", (req, res) => {
+app.get("/api/data", async (req, res) => {
+    const student = await Student.find();
     res.json(students);
 });
 
-app.get("/api/data/:id", (req, res) => {
-    const studentId = Number(req.params.id);
-    const student = students.find((item) => item.id === studentId);
+app.get("/api/data/:id", async (req, res) => {
+    const student = await Students.findById(req.params.id);
 
     if (!student) {
         return res.status(404).json({ success: false, message: "Student not found" });
@@ -22,33 +23,28 @@ app.get("/api/data/:id", (req, res) => {
     res.json(student);
 });
 
-app.post("/api/data", (req, res) => {
-    const newStudent = req.body;
-    students.push(newStudent);
-    res.status(201).json(newStudent);
+app.post("/api/data", async (req, res) => {
+    const student = await Student(req.body);
+    const savedStudent = await student.save();
+    res.status(201).json(savedStudent);
 });
 
 app.put("/api/data/:id", (req, res) => {
-    const studentId = Number(req.params.id);
-    const index = students.findIndex((student) => student.id === studentId);
+    const updatedStudent =
+    await Student.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+            new: true
+        }
+    );
 
-    if (index === -1) {
-        return res.status(404).json({ success: false, message: "Student not found" });
-    }
-
-    students[index] = { ...students[index], ...req.body, id: studentId };
-    res.json(students[index]);
+res.json(updatedStudent);
 });
 
 app.delete("/api/data/:id", (req, res) => {
-    const studentId = Number(req.params.id);
-    const index = students.findIndex((student) => student.id === studentId);
 
-    if (index === -1) {
-        return res.status(404).json({ success: false, message: "Student not found" });
-    }
-
-    students.splice(index, 1);
+    await Student.findByIdAndDelete(req.params.id);
     res.json({ success: true });
 });
 
