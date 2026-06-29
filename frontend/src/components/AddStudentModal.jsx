@@ -1,4 +1,4 @@
-
+import { emptyForm } from "../constants";
 
 const AddStudentModal = ({ showAddStud, setShowAddStud, handleAddStudent, formData, setFormData }) => {
 
@@ -6,15 +6,18 @@ const AddStudentModal = ({ showAddStud, setShowAddStud, handleAddStudent, formDa
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleAddStudent(formData);
-    setFormData({ name: "", rollno: "", dept: "", year: "", email: "", contact: "" });
-    setShowAddStud(false);
+    const added = await handleAddStudent(formData);
+
+    if (added) {
+      setFormData(emptyForm);
+      setShowAddStud(false);
+    }
   };
 
   const handleCancel = () => {
-    setFormData({ name: "", rollno: "", dept: "", year: "", email: "", contact: "" });
+    setFormData(emptyForm);
     setShowAddStud(false);
   };
 

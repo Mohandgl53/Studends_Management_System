@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-const emptyForm = {
-    name: "",
-    rollno: "",
-    dept: "",
-    year: "",
-    email: "",
-    contact: "",
-};
+import { emptyForm } from "../constants";
 
 const StudentView = ({ formData, setFormData, handleEditStudent, handleDeleteStudent, students }) => {
     const { id } = useParams();
@@ -30,8 +22,12 @@ const StudentView = ({ formData, setFormData, handleEditStudent, handleDeleteStu
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!selectedStudent) return;
-        await handleEditStudent({ ...formData, id: selectedStudent.id });
-        setIsEditing(false);
+
+        const updated = await handleEditStudent({ ...formData, id: selectedStudent.id });
+
+        if (updated) {
+            setIsEditing(false);
+        }
     };
 
     const handleEdit = () => {
@@ -49,8 +45,12 @@ const StudentView = ({ formData, setFormData, handleEditStudent, handleDeleteStu
 
     const handleDelete = async () => {
         if (!selectedStudent) return;
-        await handleDeleteStudent(selectedStudent.id);
-        navigate("/", { replace: true });
+
+        const deleted = await handleDeleteStudent(selectedStudent.id);
+
+        if (deleted) {
+            navigate("/", { replace: true });
+        }
     };
 
     if (!selectedStudent) {

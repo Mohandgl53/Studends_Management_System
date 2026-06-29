@@ -6,15 +6,7 @@ import StudentListDisplay from "./components/StudentListDisplay";
 import StudentView from "./components/StudentView";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
-
-const emptyForm = {
-  name: "",
-  rollno: "",
-  dept: "",
-  year: "",
-  email: "",
-  contact: "",
-};
+import { emptyForm } from "./constants";
 
 function App() {
   const [students, setStudents] = useState([]);
@@ -22,10 +14,12 @@ function App() {
   const [selectedDepart, setSelectedDepart] = useState("");
   const [showAddStud, setShowAddStud] = useState(false);
   const [formData, setFormData] = useState(emptyForm);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await fetch("http://localhost:3000/api/data");
         if (!response.ok) {
           throw new Error("Network Error");
@@ -35,6 +29,8 @@ function App() {
         setStudents(data);
       } catch (err) {
         console.error(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,16 +52,22 @@ function App() {
         body: JSON.stringify(newStudent),
       });
 
+      const payload = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error("Failed to add student");
+        const message = payload?.message || "Failed to add student";
+        window.alert(message);
+        return false;
       }
 
-      const createdStudent = await response.json();
+      const createdStudent = payload;
       setStudents((prevStudents) => [...prevStudents, createdStudent]);
       setFormData(emptyForm);
-      setShowAddStud(false);
+      return true;
     } catch (err) {
       console.error("Post Api Failed:", err.message);
+      window.alert(err.message || "Failed to add student");
+      return false;
     }
   };
 
@@ -79,17 +81,24 @@ function App() {
         body: JSON.stringify(data),
       });
 
+      const payload = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error("Failed to update student");
+        const message = payload?.message || "Failed to update student";
+        window.alert(message);
+        return false;
       }
 
-      const updatedStudent = await response.json();
+      const updatedStudent = payload;
       setStudents((prevStudents) =>
         prevStudents.map((student) => (student.id === updatedStudent.id ? updatedStudent : student))
       );
       setFormData(updatedStudent);
+      return true;
     } catch (err) {
       console.error("Update Api Failed:", err.message);
+      window.alert(err.message || "Failed to update student");
+      return false;
     }
   };
 
@@ -99,14 +108,21 @@ function App() {
         method: "DELETE",
       });
 
+      const payload = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error("Failed to delete student");
+        const message = payload?.message || "Failed to delete student";
+        window.alert(message);
+        return false;
       }
 
       setStudents((prevStudents) => prevStudents.filter((student) => student.id !== studentId));
       setFormData(emptyForm);
+      return true;
     } catch (err) {
       console.error("Delete Api Failed:", err.message);
+      window.alert(err.message || "Failed to delete student");
+      return false;
     }
   };
 
@@ -137,6 +153,7 @@ function App() {
                 students={students}
                 search={search}
                 selectedDepart={selectedDepart}
+                loading={loading}
               />
             </>
           }

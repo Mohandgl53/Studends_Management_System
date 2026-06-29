@@ -1,9 +1,7 @@
-
-
 function StudentControl({ search, setSearch, selectedDepart, setSelectedDepart, setShowAddStud }) {
 
     return (
-        <div>
+        <div id="StudentControl">
             <input
                 id="search"
                 type="text"
@@ -19,11 +17,11 @@ function StudentControl({ search, setSearch, selectedDepart, setSelectedDepart, 
             >
                 <option value="" disabled hidden>Department</option>
                 <option value="All">All</option>
-                <option value="ai&ds">AI&DS</option>
-                <option value="cse">CSE</option>
-                <option value="ece">ECE</option>
-                <option value="eee">EEE</option>
-                <option value="mech">MECH</option>
+                <option value="AI&DS">AI&DS</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="MECH">MECH</option>
             </select>
             <button id="addstud-btn" onClick={() => setShowAddStud(true)}>Add New Student</button>
         </div>
