@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/data";
+const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/data` : "/api/data";
 import Header from "./components/Header";
 import StudentControl from "./components/StudentControl";
 import AddStudentModal from "./components/AddStudentModal";
