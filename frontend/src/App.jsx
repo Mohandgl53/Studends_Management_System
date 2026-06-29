@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/data";
 import Header from "./components/Header";
 import StudentControl from "./components/StudentControl";
 import AddStudentModal from "./components/AddStudentModal";
@@ -20,7 +22,7 @@ function App() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/api/data");
+        const response = await fetch(API_URL);
         if (!response.ok) {
           throw new Error("Network Error");
         }
@@ -44,7 +46,7 @@ function App() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/data", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +75,7 @@ function App() {
 
   const handleEditStudent = async (data) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/data/${data.id}`, {
+      const response = await fetch(`${API_URL}/${data.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +106,7 @@ function App() {
 
   const handleDeleteStudent = async (studentId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/data/${studentId}`, {
+      const response = await fetch(`${API_URL}/${studentId}`, {
         method: "DELETE",
       });
 
